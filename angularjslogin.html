@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>ANGULAR</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <style>
+            html{
+                background:url('bg.jpg') no-repeat center center fixed;
+                -webkit-background-size:cover;
+                -moz-background-size:cover;
+                -o-background-size:cover;
+                background-size:cover;
+            }
+            .box{
+                position: absolute;
+                top: 53%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                width: 26rem;
+                max-height: 35rem;
+                padding-left: 20px;
+                padding-right: 20px;
+                padding-bottom: 30px;
+                box-sizing: border-box;
+                background: rgba(0,0,0,0.6);
+                border-radius: 0.625rem;
+            }
+            .box h1{
+                padding-top: 30px;
+                padding-bottom: 20px;
+                text-align: center;
+                font-size: 40px;
+                background: -webkit-linear-gradient(#fdf497,#fdf497, #fd5949,#d6249f, #285aeb);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color:transparent;
+            }
+            .avatar{
+                width:100px;
+                height: 100px;
+                border-radius: 50%;
+                position: absolute;
+                top: -50px;
+                left: calc(50%-50px);
+            }
+            .textfield{
+                display:inline-block;
+                height: 80px;
+                padding-left: 21px;
+                position: relative;
+            }
+            .textfield .textfield-input{
+                background: transparent;
+                color: #fff;
+                border: 0;
+                border-bottom: 1px solid #9e9e9e;
+                width: 265px;
+                font-size: 18px;
+                position: relative;
+                left: 3%;
+                z-index: 1;
+            }
+            .textfield .textfield-input:focus{
+                outline: none;
+            }
+            .textfield label{
+                color: #9e9e9e;
+                font-family: 'Roboto', sans-serif;
+                font-size: 18px;
+                left: 18%;
+                position: absolute;
+                top: 4%;
+                transition: top .3s ease-in-out 0s;
+                z-index: 0;
+            }
+            .textfield .textfield-input-focus + label {
+                color: #03a9f4;
+                top: -30%;
+            }
+            .textfield .textfield-input + label + .indicator{
+                border-bottom:2px solid #03a9f4;
+                height: 0;
+                position: absolute;
+                top: 28%;
+                left: 18%;
+                transition: width .1s ease-in 0s;
+                width: 0;
+                z-index: 2;
+            }
+            .textfield .textfield-input:focus + label + .indicator{
+                width: 85%;
+            }
+            .textfield .textfield-input:focus + label{
+                top: -30px;
+            }
+            .icon{
+                color: #fff;
+                min-width: 22px;
+                text-align: center;
+                font-size: 21px;
+            }
+            .error{
+                padding-left: 35px;
+                color: #ff0033;
+                animation: fadeIn 0.5s linear forwards;
+                font-weight: bold;
+            }
+            @keyframes fadeIn {
+                0%{
+                    opacity:0;
+                }
+                100%{
+                    opacity: 1;
+                }
+            }
+            .account{
+                color: #fff;
+                text-align: center;
+            }
+            .account a{
+                color: #1670f0;
+                cursor: pointer;
+                font-weight: bold;
+            }
+            .logindiv{
+                text-align:center;
+                padding-top:20px;
+                padding-bottom: 35px;
+            }
+            .loginbtn{
+                position: absolute;
+                text-align: center;
+                margin: auto;
+                transform: translate(-50%, -50%);
+                color: #1670f0;
+                padding: 15px 50px;
+                font-size:16px;
+                letter-spacing: 2px;
+                text-transform: uppercase;
+                box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+                overflow: hidden;
+                background: rgba(0,0,0,0.9);
+                border: none;
+                cursor: pointer;
+                outline: none;
+                font-weight: bold;
+            }
+            .lspan:nth-child(1){
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 4px;
+                background: linear-gradient(to right, #0c002b, #1779ff);
+                animation: animate1 2s linear infinite;
+                animation-delay: 1s;
+            }
+            @keyframes animate1 {
+                0%{
+                    transform: translateX(-100%);
+                }
+                100%{
+                    transfrom: translateX(100%);
+                }
+            }
+            .lspan:nth-child(2){
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 4px;
+                height: 100%;
+                background: linear-gradient(to top, #0c002b, #1779ff);
+                animation: animate2 2s linear infinite;
+            }
+            @keyframes animate2 {
+                0%{
+                    transform: translateY(100%);
+                }
+                100%{
+                    transfrom: translateY(-100%);
+                }
+            }
+            .lspan:nth-child(3){
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                width: 100%;
+                height: 4px;
+                background: linear-gradient(to left, #0c002b, #1779ff);
+                animation: animate3 2s linear infinite;
+                animation-delay: 1s;
+            }
+            @keyframes animate3 {
+                0%{
+                    transform: translateX(100%);
+                }
+                100%{
+                    transfrom: translateX(-100%);
+                }
+            }
+            .lspan:nth-child(4){
+                position: absolute;
+                top: 0;
+                right: 0;
+                width: 4px;
+                height: 100%;
+                background: linear-gradient(to bottom, #0c002b, #1779ff);
+                animation: animate4 2s linear infinite;
+            }
+            @keyframes animate4 {
+                0%{
+                    transform: translateY(-100%);
+                }
+                100%{
+                    transfrom: translateY(100%);
+                }
+            }
+        </style>
+    </head>
+    <body ng-app="myApp" ng-controller="myCtrl">
+        <div class="box">
+            <img src="pic.jpg" class="avatar">
+                <form name="signupform" novalidate autocomplete="off">
+                <h1 ng-show="showlogin">Login</h1>
+                <h1 ng-show="showsignup">Sign Up</h1>
+                <div class="textfield">
+                    <i class="fa fa-user icon"></i>
+                    <input type="text" class="textfield-input" name="username" ng-model="username" required>
+                    <label> Username </label>
+                    <div class="indicator"></div>
+                    <div>
+                        <span ng-show="signupform.$submitted || signupform.username.$dirty">
+                            <span class="error" ng-show="signupform.username.$error.required"><i class="fa fa-exclamation-circle"></i> Username Required</span>
+                        </span><br>
+                </div>
+            </div>
+            <div class="textfield">
+                <i class="fa fa-key icon"></i>
+                <input type="password" class="textfield-input" name="password" ng-model="password" required>
+                <label> Password </label>
+                <div class="indicator"></div>
+                <div>
+                    <span ng-show="signupform.$submitted || signupform.password.$dirty">
+                        <span class="error" ng-show="signupform.password.$error.required"><i class="fa fa-exclamation-circle"></i> Password Required</span>
+                    </span><br>
+                </div>
+            </div>
+            <div class="textfield">
+                <i class="fa fa-check icon"></i>
+                <input type="password" class="textfield-input" name="cpassword" ng-model="cpassword" required>
+                <label> Confirm Password </label>
+                <div class="indicator"></div>
+                <div>
+                    <span ng-show="signupform.cpassword.$dirty && !(signupform.cpassword.$error.required)">
+                        <span class="error" ng-show="password != cpassword"><i class="fa fa-exclamation-circle"></i>Your Password must match</span>
+                    </span>
+                    <span ng-show="signupform.$submitted || signupform.cpassword.$dirty">
+                        <span class="error" ng-show="signupform.cpassword.$error.required"><i class="fa fa-exclamation-circle"></i> Confirm Password Required</span>
+                    </span>
+                </div>
+            </div><br>
+            <div class=logindiv>
+                <button type="submit" name="submit" class="loginbtn" ng-click="login()">
+                    <span class=lspan></span>
+                    <span class=lspan></span>
+                    <span class=lspan></span>
+                    <span class=lspan></span>
+                {{btnName}}</button>
+            </div>
+            <p class="account" ng-show="showsignup">Already have an Account? <span><a ng-click="loginpage()"> Login </a></span></p>
+            <p class="account" ng-show="showlogin">New User? <span><a ng-click="signuppage()"> Create an Account</a></span></p>
+        </form>
+    </div>
+</body>
+    <script>
+        var app= angular.module("myApp", []);
+        app.controller("myCtrl", function($scope,$http,$window){
+            $scope.btnName = "login";
+            $scope.showsignup = false;
+            $scope.showlogin = true;
+            $scope.signuppage = function(){
+                $scope.showsignup =  $scope.showsignup ? false : true;
+                $scope.showlogin = false;
+                $scope.btnName = "sign up";
+                $scope.signupform.$setPristine();
+                $scope.username = null;
+                $scope.password = null;
+            }
+            $scope.loginpage = function(){
+                $scope.showlogin =  $scope.showlogin ? false : true;
+                $scope.showsignup = false;
+                $scope.btnName = "login";
+                $scope.signupform.$setPristine();
+                $scope.username = null;
+                $scope.password = null;
+                $scope.cpassword = null;
+            }
+            $scope.login = function(){
+                if($scope.btnName == "sign up"){
+                    if($scope.username != null && $scope.password != null && $scope.cpassword != null){
+                        $scope.postf();
+                    }
+                }
+                else if($scope.btnName == "login"){
+                    if($scope.username != null && $scope.password != null){
+                        $scope.postf();
+                    }
+                }
+            }
+            $scope.postf = function(){
+                $http.post(
+                    "login.php", {
+                        'username' :$scope.username,
+                        'password' :$scope.password,
+                        'btnName' :$scope.btnName
+                    }
+                ).success(function(data){
+                    alert(data);
+                    if(data=="Username already exists. Use different username"){
+                        return;
+                    }
+                    $window.location.reload();
+                    if(data=="Login Successful"){
+                        location='jane.html';;
+                    }
+                });
+            }
+        });
+    </script>
+</html>
